@@ -1,57 +1,66 @@
 .changed-container {
-  position: absolute;
   top: 0;
   bottom: 0;
   right: 0;
   left: 0;
+  position: absolute;
 }
 
 .changed-container .seconds {
   width: 1%;
   height: 45%;
-  position: absolute;
   top: 10%;
   left: 49.5%;
-  background: #000;
+  position: absolute;
+  background: #315fb3;
   z-index: 10;
 }
 
 .changed-container .minutes {
   width: 2%;
   height: 35%;
-  position: absolute;
   top: 20%;
   left: 49%;
-  background: #000;
+  position: absolute;
+  background: #315fb3;
   z-index: 8;
 }
 
+* {
+  font-family: 'Overlock SC', cursive;
+}
+
+body {
+  background: #222222;
+}
+
 .clock {
-  width: 500px;
-  height: 500px;
-  border: 2px solid #000;
+  width: 30vw;
+  height: 30vw;
+  border: 1vw solid white;
   border-radius: 50%;
   position: relative;
+  margin: auto;
 }
 
 .clock .dot {
-  width: 30px;
-  height: 30px;
-  position: absolute;
+  width: 2vw;
+  height: 2vw;
   top: 50%;
   left: 50%;
+  position: absolute;
   -webkit-transform: translate(-50%, -50%);
           transform: translate(-50%, -50%);
-  background-color: #000;
+  background-color: #315fb3;
   border-radius: 50%;
 }
 
 .clock .seconds-container {
-  position: absolute;
   top: 0;
   bottom: 0;
   right: 0;
   left: 0;
+  position: absolute;
   -webkit-animation: rotate 60s infinite linear;
           animation: rotate 60s infinite linear;
   -webkit-animation-play-state: paused;
@@ -61,19 +70,19 @@
 .clock .seconds-container .seconds {
   width: 1%;
   height: 45%;
-  position: absolute;
   top: 10%;
   left: 49.5%;
-  background: #000;
+  position: absolute;
+  background: #315fb3;
   z-index: 10;
 }
 
 .clock .minutes-container {
-  position: absolute;
   top: 0;
   bottom: 0;
   right: 0;
   left: 0;
+  position: absolute;
   -webkit-animation: rotate 3600s infinite steps(60);
           animation: rotate 3600s infinite steps(60);
   -webkit-animation-play-state: paused;
@@ -83,26 +92,88 @@
 .clock .minutes-container .minutes {
   width: 2%;
   height: 35%;
-  position: absolute;
   top: 20%;
   left: 49%;
-  background: #000;
+  position: absolute;
+  background: #315fb3;
   z-index: 8;
 }
 
 .clock .time-container {
+  width: 100%;
+  top: 50%;
+  bottom: 0;
+  right: 0;
+  left: 0;
   position: absolute;
-  top: 75%;
-  left: 50%;
-  -webkit-transform: translate(-50%, -50%);
-          transform: translate(-50%, -50%);
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
 }
 
 .clock .time-container #time {
-  color: #000;
+  color: #315fb3;
   font-size: 3em;
   z-index: 20;
   vertical-align: middle;
+}
+
+.buttons-div {
+  width: 100%;
+  height: auto;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  margin-top: 2vw;
+}
+
+.buttons-div button {
+  border: none;
+  background: none;
+  color: white;
+  cursor: pointer;
+  outline: none;
+  font-size: 2vw;
+}
+
+.buttons-div .start {
+  width: 5vw;
+  height: 5vw;
+  background: #315fb3;
+  border-radius: 50%;
+  margin-right: 1vw;
+  margin-left: 1vw;
+  position: relative;
+  text-align: center;
+}
+
+.buttons-div .start i {
+  font-size: 2vw;
+}
+
+.buttons-div .start .fa-pause {
+  display: none;
+}
+
+#changed-timer {
+  color: #315fb3;
+  font-size: 3em;
+  z-index: 20;
+  vertical-align: middle;
+  -webkit-animation: blinker 0.6s linear infinite;
+          animation: blinker 0.6s linear infinite;
 }
 
 @-webkit-keyframes rotate {
@@ -116,6 +187,18 @@
   100% {
     -webkit-transform: rotateZ(360deg);
             transform: rotateZ(360deg);
+  }
+}
+
+@-webkit-keyframes blinker {
+  50% {
+    opacity: 0;
+  }
+}
+
+@keyframes blinker {
+  50% {
+    opacity: 0;
   }
 }
 /*# sourceMappingURL=index.css.map */

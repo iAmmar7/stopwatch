@@ -8,7 +8,7 @@
 }
 
 @mixin position($top: null, $bottom: null, $right: null, $left: null) {
-  position: absolute;
+  // position: absolute;
   top: $top;
   bottom: $bottom;
   right: $right;

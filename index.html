@@ -4,12 +4,18 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.0/css/all.css" integrity="sha384-lZN37f5QGtY3VHgisS14W3ExzMWZxybE1SJSEsQp9S+oqd12jhcu+A56Ebc1zFSJ" crossorigin="anonymous">
+  <link href="https://fonts.googleapis.com/css?family=Overlock+SC" rel="stylesheet">
   <link rel="stylesheet" href="sass/index.css">
   <title>StopWatch</title>
 </head>
 <body>
 
   <div class="clock">
+    
+    <!-- <svg height="500" width="500">
+      <circle cx="100" cy="100" r="90" stroke="black" stroke-width="3" fill="red" />
+    </svg> -->
 
     <div class="dot"></div>
     
@@ -26,8 +32,8 @@
   </div>
 
   <div class="buttons-div">
-    <button onclick="init('run')" class="start">Start</button>
     <button onclick="init('lap')">Lap</button>
+    <button onclick="init('run')" class="start"><i class="fas fa-play"></i><i class="fas fa-pause"></i></button>
     <button onclick="init('reset')">Reset</button>
   </div>
 

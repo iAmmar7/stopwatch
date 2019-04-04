@@ -1,18 +1,22 @@
 %changed {
   @include position(0, 0, 0, 0);
+  position: absolute;
 
   .seconds {
     @include size(1%, 45%);
     @include position(10%, null, null, 49.5%);
+    position: absolute;
     background: $tick-bg;
+    // transform-origin: 0 0;
     z-index: 10;
   }
 
-  
   .minutes {
     @include size(2%, 35%);
     @include position(20%, null, null, 49%);
+    position: absolute;
     background: $tick-bg;
+    // transform-origin: 0 0;
     z-index: 8;
   }
 }
