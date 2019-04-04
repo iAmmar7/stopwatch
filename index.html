@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <link rel="stylesheet" href="sass/index.css">
+  <title>StopWatch</title>
+</head>
+<body>
+
+  <div class="clock">
+
+    <div class="dot"></div>
+    
+    <div class="seconds-container">
+      <div class="seconds"></div>
+    </div>
+    <div class="minutes-container">
+      <div class="minutes"></div>
+    </div>
+
+    <div class="time-container">
+      <small id="time">00:00</small>
+    </div>
+  </div>
+
+  <div class="buttons-div">
+    <button onclick="start()" class="start">Start</button>
+    <button onclick="lap()">Lap</button>
+    <button onclick="reset()">Reset</button>
+  </div>
+
+  <ul class="lap-list">
+
+  </ul>
+
+  <script src="javascript/index.js"></script>
+</body>
+</html>

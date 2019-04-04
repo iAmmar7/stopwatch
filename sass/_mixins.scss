@@ -1,0 +1,16 @@
+@mixin size($width, $height: null, $max: null, $min: null) {
+  width: $width;
+  height: $height;
+  max-height: $max;
+  max-width: $max;
+  min-height: $min;
+  min-width: $min;
+}
+
+@mixin position($top: null, $bottom: null, $right: null, $left: null) {
+  position: absolute;
+  top: $top;
+  bottom: $bottom;
+  right: $right;
+  left: $left;
+}

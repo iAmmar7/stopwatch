@@ -1,0 +1,65 @@
+@import "_variable.scss";
+@import "_mixins.scss";
+
+.clock {
+  // background: #fff url("../images/clock.svg") no-repeat center;
+  // background-size: 88%;
+  @include size(500px, 500px);
+  border: 2px solid $tick-bg;
+  border-radius: 50%;
+  position: relative;
+
+  .dot {
+    @include size(30px, 30px);
+    @include position(50%, null, null, 50%);
+    transform: translate(-50%, -50%);
+    background-color: $tick-bg;
+    border-radius: 50%;
+  }
+
+  .seconds-container {
+    @include position(0, 0, 0, 0);
+    animation: rotate 60s infinite linear;
+
+    .seconds {
+      @include size(1%, 45%);
+      @include position(10%, null, null, 49.5%);
+      background: $tick-bg;
+      // transform-origin: 0 0;
+      z-index: 10;
+    }
+  }
+
+  .minutes-container {
+    @include position(0, 0, 0, 0);
+    animation: rotate 3600s infinite steps(60);
+
+    .minutes {
+      @include size(2%, 35%);
+      @include position(20%, null, null, 49%);
+      background: $tick-bg;
+      // transform-origin: 0 0;
+      z-index: 8;
+    }
+  }
+
+  .time-container {
+    @include position(75%, null, null, 50%);
+    transform: translate(-50%, -50%);
+
+    #time {
+      // @include size(2%, 35%);
+      // // @include position(20%, null, null, 49%);
+      color: $tick-bg;
+      font-size: 3em;
+      z-index: 20;
+      vertical-align: middle;
+    }
+  }
+}
+
+@keyframes rotate {
+  100% {
+    transform: rotateZ(360deg);
+  }
+}
