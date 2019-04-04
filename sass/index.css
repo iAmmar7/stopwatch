@@ -1,3 +1,31 @@
+.changed-container {
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  right: 0;
+  left: 0;
+}
+
+.changed-container .seconds {
+  width: 1%;
+  height: 45%;
+  position: absolute;
+  top: 10%;
+  left: 49.5%;
+  background: #000;
+  z-index: 10;
+}
+
+.changed-container .minutes {
+  width: 2%;
+  height: 35%;
+  position: absolute;
+  top: 20%;
+  left: 49%;
+  background: #000;
+  z-index: 8;
+}
+
 .clock {
   width: 500px;
   height: 500px;
@@ -26,6 +54,8 @@
   left: 0;
   -webkit-animation: rotate 60s infinite linear;
           animation: rotate 60s infinite linear;
+  -webkit-animation-play-state: paused;
+          animation-play-state: paused;
 }
 
 .clock .seconds-container .seconds {
@@ -46,6 +76,8 @@
   left: 0;
   -webkit-animation: rotate 3600s infinite steps(60);
           animation: rotate 3600s infinite steps(60);
+  -webkit-animation-play-state: paused;
+          animation-play-state: paused;
 }
 
 .clock .minutes-container .minutes {
