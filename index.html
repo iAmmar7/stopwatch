@@ -9,37 +9,48 @@
   <link rel="stylesheet" href="sass/index.css">
   <title>StopWatch</title>
 </head>
-<body>
+<body onunload="refresh()">
 
-  <div class="clock">
-    
-    <!-- <svg height="500" width="500">
-      <circle cx="100" cy="100" r="90" stroke="black" stroke-width="3" fill="red" />
-    </svg> -->
+  <div class="wrapper">
+    <div class="clock-container">
+      <div class="clock">
+        
+        <!-- <svg height="500" width="500">
+          <circle cx="100" cy="100" r="90" stroke="black" stroke-width="3" fill="red" />
+        </svg> -->
 
-    <div class="dot"></div>
-    
-    <div class="seconds-container">
-      <div class="seconds"></div>
-    </div>
-    <div class="minutes-container">
-      <div class="minutes"></div>
+        <div class="dot"></div>
+        
+        <div class="seconds-container">
+          <div class="seconds"></div>
+        </div>
+        <div class="minutes-container">
+          <div class="minutes"></div>
+        </div>
+
+        <div class="time-container">
+          <p id="time"></p>
+        </div>
+      </div>
+
+      <div class="buttons-div">
+        <button onclick="init('lap')" class="lap">Lap</button>
+        <button onclick="init('run')" class="start"><i class="fas fa-play"></i><i class="fas fa-pause"></i></button>
+        <button onclick="init('reset')" class="reset">Reset</button>
+      </div>
     </div>
 
-    <div class="time-container">
-      <small id="time">00:00</small>
+    <div class="lap-container">
+      <h2>Laps History</h2>
+      <hr/>
+      <ul class="lap-list">
+      </ul>
+      <div class="clear-laps">
+        <button onclick="clearLaps()">Clear All</button>
+      </div>
     </div>
+
   </div>
-
-  <div class="buttons-div">
-    <button onclick="init('lap')">Lap</button>
-    <button onclick="init('run')" class="start"><i class="fas fa-play"></i><i class="fas fa-pause"></i></button>
-    <button onclick="init('reset')">Reset</button>
-  </div>
-
-  <ul class="lap-list">
-
-  </ul>
 
   <script src="javascript/index.js"></script>
 </body>
