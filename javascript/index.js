@@ -190,7 +190,8 @@ function refresh() {
 }
 
 function displayLaps() {
-  for (let i=0; i<laps_array.length; i++) {
+  reverse_array = laps_array.reverse();
+  for (let i=0; i<reverse_array.length; i++) {
     var li = document.createElement("li");
     li.appendChild(
       document.createTextNode(`Minutes: ${laps_array[i].Minutes} Seconds: ${laps_array[i].Seconds}`)
