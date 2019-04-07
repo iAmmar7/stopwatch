@@ -1,4 +1,5 @@
 var clock = document.querySelector(".clock");
+var lap_container = document.querySelector(".lap-container");
 
 var timer = document.getElementById("time");
 
@@ -69,6 +70,10 @@ function init(value) {
 
   if (value === "lap") {
     lap();
+    lap_container.style.transform = "translate(120%, -110%)";
+    lap_container.style.visibility = "visible";
+    clock.style.transform = "translateX(-80%)";
+    lap_container.style.opacity = "1"
   }
 
   if (value === "reset") {
@@ -224,10 +229,20 @@ function displayLaps() {
       document.createTextNode(`#${i + 1}`)
     )
 
+    var p = document.createElement("p");
+    p.appendChild(
+      document.createTextNode(`${laps_array[i].Minutes} ${laps_array[i].Seconds}.`)
+    )
+
+    var ms = document.createElement("small");
+    ms.setAttribute("class", "ms");
+    ms.appendChild(
+      document.createTextNode(`${laps_array[i].Mili}`)
+    )
+
     li.appendChild(small);
-    li.appendChild(
-      document.createTextNode(`${laps_array[i].Minutes} ${laps_array[i].Seconds}.${laps_array[i].Mili}`)
-    );
+    li.appendChild(p);
+    li.appendChild(ms);
     parent.appendChild(li);
   }
 }
