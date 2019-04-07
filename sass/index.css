@@ -262,8 +262,8 @@ body {
 
 .wrapper .clock-container .clock .minutes {
   width: 2%;
-  height: 40%;
-  top: 10%;
+  height: 35%;
+  top: 15%;
   left: 49%;
   position: relative;
   background: #315fb3;
@@ -274,8 +274,8 @@ body {
 
 .wrapper .clock-container .clock .seconds {
   width: 1%;
-  height: 45%;
-  top: 14%;
+  height: 52%;
+  top: 8%;
   left: 49.5%;
   position: relative;
   background: #315fb3;
@@ -287,12 +287,12 @@ body {
 .wrapper .clock-container .clock .miliseconds {
   width: 1%;
   height: 20%;
-  top: 39%;
+  top: 34%;
   left: 49.5%;
   position: relative;
   background: #315fb3;
-  -webkit-transform-origin: 50% 50%;
-          transform-origin: 50% 50%;
+  -webkit-transform-origin: 50% 80%;
+          transform-origin: 50% 80%;
   z-index: 10;
 }
 
@@ -421,9 +421,18 @@ body {
 }
 
 .wrapper .lap-container .lap-list li {
+  font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
   color: white;
   cursor: pointer;
   font-size: 1.5vw;
+  margin-bottom: 0.5vw;
+  margin-right: 1vw;
+  padding: 0.1vw 1vw;
+  border-radius: 5px;
+}
+
+.wrapper .lap-container .lap-list li:hover {
+  background-color: #7a7a7a;
 }
 
 .wrapper .lap-container .lap-list::-webkit-scrollbar {

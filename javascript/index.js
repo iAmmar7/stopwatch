@@ -9,6 +9,7 @@ var reset_button = document.querySelector(".reset");
 var lap_button = document.querySelector(".lap");
 
 var parent = document.querySelector(".lap-list");
+
 var laps_array = [];
 var store_array;
 
@@ -52,7 +53,7 @@ displayLaps();
 document.querySelector(".hours").style.transform = `rotateZ(${hours * 6}deg)`;
 document.querySelector(".minutes").style.transform = `rotateZ(${minutes * 6}deg)`;
 document.querySelector(".seconds").style.transform = `rotateZ(${seconds * 6}deg)`;
-document.querySelector(".seconds").style.transform = `rotateZ(${seconds * 6}deg)`;
+document.querySelector(".miliseconds").style.transform = `rotateZ(${miliseconds * 6}deg)`;
 displayTime(hours, minutes, seconds, miliseconds);
 
 if(seconds > 0 || minutes > 0) {
@@ -105,10 +106,10 @@ function lap() {
     // document.querySelector(".lap-container").style.display = "flex";
     // document.querySelector(".lap-container").style.transform = "translateX(-40%)";
 
-    laps_array.push({Minutes: minutes, Seconds: seconds});
+    laps_array.unshift({'Minutes': minutes, 'Seconds': seconds});
     localStorage.setItem('laps_array', JSON.stringify(laps_array));
 
-    removeLaps();
+    removeLapsFromPage();
     displayLaps();
   }
 }
@@ -122,7 +123,7 @@ function reset() {
   hours = minutes = seconds = miliseconds = 0;
 
   displayTime(0, 0, 0, 0);
-  clearTime();
+  removeTimeFromStorage();
 }
 
 function updateState(currentState) {
@@ -152,7 +153,6 @@ function updateState(currentState) {
   }
   
   if (currentState === "stop") {
-
     reset_button.style.visibility = "initial";
     lap_button.style.visibility = "initial";
     reset_button.style.opacity = "0";
@@ -201,7 +201,7 @@ function increaseTime() {
       }
     }
   }
-  console.log(hours, minutes, seconds, miliseconds);
+  // console.log(hours, minutes, seconds, miliseconds);
 
   displayTime(hours, minutes, seconds, miliseconds);
 }
@@ -214,27 +214,41 @@ function refresh() {
 }
 
 function displayLaps() {
-  reverse_array = laps_array.reverse();
-  for (let i=0; i<reverse_array.length; i++) {
+  for (let i=0; i<laps_array.length; i++) {
     var li = document.createElement("li");
+    var small = document.createElement("small");
+    li.setAttribute("id", i);
+    li.setAttribute("onclick", `deleteLap(${i})`);
+   
     li.appendChild(
-      document.createTextNode(`Minutes: ${laps_array[i].Minutes} Seconds: ${laps_array[i].Seconds}`)
+      document.createTextNode(`#${i} ${laps_array[i].Minutes} ${laps_array[i].Seconds}`)
     );
     parent.appendChild(li);
   }
 }
 
 function removeLaps() {
+  console.log(parent);
+  removeLapsFromPage();
+  laps_array.splice(0);
+  localStorage.removeItem('laps_array');
+}
+
+function removeLapsFromPage() {
   while (parent.firstChild) {
     parent.removeChild(parent.firstChild);
   }
 }
 
-function clearLaps() {
-  localStorage.removeItem('laps_array');
-  removeLaps();
+function deleteLap(id) {
+  console.log("i am " + id);
+  laps_array.splice(id,1);
+  localStorage.setItem('laps_array', JSON.stringify(laps_array)); 
+  removeLapsFromPage(); 
+  displayLaps();
 }
-function clearTime() {
+
+function removeTimeFromStorage() {
   localStorage.removeItem('hours');
   localStorage.removeItem('minutes');
   localStorage.removeItem('seconds');

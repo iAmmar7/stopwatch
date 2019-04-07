@@ -87,16 +87,16 @@ body {
         z-index: 6;
       }
       .minutes {
-        @include size(2%, 40%);
-        @include position(10%, null, null, 49%);
+        @include size(2%, 35%);
+        @include position(15%, null, null, 49%);
         position: relative;
         background: $tick-bg;
         transform-origin: 50% 100%;
         z-index: 8;
       }
       .seconds {
-        @include size(1%, 45%);
-        @include position(14%, null, null, 49.5%);
+        @include size(1%, 52%);
+        @include position(8%, null, null, 49.5%);
         position: relative;
         background: $tick-bg;
         transform-origin: 50% 80%;
@@ -104,10 +104,10 @@ body {
       }
       .miliseconds {
         @include size(1%, 20%);
-        @include position(39%, null, null, 49.5%);
+        @include position(34%, null, null, 49.5%);
         position: relative;
         background: $tick-bg;
-        transform-origin: 50% 50%;
+        transform-origin: 50% 80%;
         z-index: 10;
       }
 
@@ -227,9 +227,18 @@ body {
       }
 
       li {
+        font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
         color: white;
         cursor: pointer;
         font-size: 1.5vw;
+        margin-bottom: 0.5vw;
+        margin-right: 1vw;
+        padding: 0.1vw 1vw;
+        border-radius: 5px;
+
+        &:hover {
+          background-color: $li-hover; 
+        }
       }
     }
     .lap-list::-webkit-scrollbar { 
