@@ -14,10 +14,10 @@ var laps_array = [];
 var store_array;
 
 var state = "stop";
-    hours = 0;
-    minutes = 0;
-    seconds = 0;
-    miliseconds = 0;
+hours = 0;
+minutes = 0;
+seconds = 0;
+miliseconds = 0;
 var interval;
 
 store_hours = JSON.parse(localStorage.getItem('hours'));
@@ -56,22 +56,22 @@ document.querySelector(".seconds").style.transform = `rotateZ(${seconds * 6}deg)
 document.querySelector(".miliseconds").style.transform = `rotateZ(${miliseconds * 6}deg)`;
 displayTime(hours, minutes, seconds, miliseconds);
 
-if(seconds > 0 || minutes > 0) {
+if (seconds > 0 || minutes > 0) {
   timer.id = "changed-timer";
 }
 
 
 function init(value) {
-  if(value === "run") {
+  if (value === "run") {
     timer.className = "timer";
     start();
   }
 
-  if(value === "lap") {
+  if (value === "lap") {
     lap();
   }
 
-  if(value === "reset") {
+  if (value === "reset") {
     reset();
   }
 }
@@ -102,11 +102,11 @@ function lap() {
     // timer.style.fontSize = "3.5vw";
 
     // document.querySelector(".clock-container").style.transform = "translateX(-10%)";
-    
+
     // document.querySelector(".lap-container").style.display = "flex";
     // document.querySelector(".lap-container").style.transform = "translateX(-40%)";
 
-    laps_array.unshift({'Minutes': minutes, 'Seconds': seconds});
+    laps_array.unshift({ 'Minutes': minutes, 'Seconds': seconds, 'Mili': miliseconds});
     localStorage.setItem('laps_array', JSON.stringify(laps_array));
 
     removeLapsFromPage();
@@ -137,7 +137,7 @@ function updateState(currentState) {
     lap_button.style.visibility = "visible";
     reset_button.style.opacity = "1";
     lap_button.style.opacity = "1";
-    
+
     timer.id = "time";
 
     interval = setInterval(increaseTime, 1000 / 60);
@@ -151,7 +151,7 @@ function updateState(currentState) {
 
     timer.id = "changed-timer";
   }
-  
+
   if (currentState === "stop") {
     reset_button.style.visibility = "initial";
     lap_button.style.visibility = "initial";
@@ -167,12 +167,12 @@ function updateState(currentState) {
 
 function displayTime(hr, min, sec, ms) {
   if (sec < 10) {
-    sec = `0${sec}`; 
+    sec = `0${sec}`;
   }
   if (min < 10) {
     min = `0${min}`
   }
-  time = `${min}:${sec}`; 
+  time = `${min}:${sec}`;
   console.log(time);
 
   if (state === "pause") {
@@ -189,13 +189,13 @@ function displayTime(hr, min, sec, ms) {
 
 function increaseTime() {
   miliseconds++;
-  if(miliseconds >= 60) {
+  if (miliseconds >= 60) {
     miliseconds = 0;
     seconds++;
-    if(seconds >= 60) {
+    if (seconds >= 60) {
       seconds = 0;
       minutes++;
-      if(minutes >= 60) {
+      if (minutes >= 60) {
         minutes = 0;
         hours++;
       }
@@ -214,14 +214,19 @@ function refresh() {
 }
 
 function displayLaps() {
-  for (let i=0; i<laps_array.length; i++) {
+  for (let i = 0; i < laps_array.length; i++) {
     var li = document.createElement("li");
-    var small = document.createElement("small");
     li.setAttribute("id", i);
     li.setAttribute("onclick", `deleteLap(${i})`);
-   
+
+    var small = document.createElement("small");
+    small.appendChild(
+      document.createTextNode(`#${i + 1}`)
+    )
+
+    li.appendChild(small);
     li.appendChild(
-      document.createTextNode(`#${i} ${laps_array[i].Minutes} ${laps_array[i].Seconds}`)
+      document.createTextNode(`${laps_array[i].Minutes} ${laps_array[i].Seconds}.${laps_array[i].Mili}`)
     );
     parent.appendChild(li);
   }
@@ -242,9 +247,9 @@ function removeLapsFromPage() {
 
 function deleteLap(id) {
   console.log("i am " + id);
-  laps_array.splice(id,1);
-  localStorage.setItem('laps_array', JSON.stringify(laps_array)); 
-  removeLapsFromPage(); 
+  laps_array.splice(id, 1);
+  localStorage.setItem('laps_array', JSON.stringify(laps_array));
+  removeLapsFromPage();
   displayLaps();
 }
 

@@ -217,6 +217,7 @@ body {
   height: 100%;
   position: absolute;
   left: calc(50% - 0.5em);
+  z-index: 10;
 }
 
 .wrapper .clock-container .clock .num div {
@@ -238,6 +239,7 @@ body {
           transform: translate(-50%, -50%);
   background-color: #315fb3;
   border-radius: 50%;
+  z-index: 10;
 }
 
 .wrapper .clock-container .clock .hours-container, .wrapper .clock-container .clock .minutes-container, .wrapper .clock-container .clock .seconds-container, .wrapper .clock-container .clock .miliseconds-container {
@@ -285,15 +287,19 @@ body {
 }
 
 .wrapper .clock-container .clock .miliseconds {
-  width: 1%;
-  height: 20%;
-  top: 34%;
-  left: 49.5%;
+  width: 4%;
+  height: 55%;
+  top: -3.5%;
+  left: 48%;
   position: relative;
   background: #315fb3;
-  -webkit-transform-origin: 50% 80%;
-          transform-origin: 50% 80%;
-  z-index: 10;
+  -webkit-transform-origin: 50% 97%;
+          transform-origin: 50% 97%;
+  z-index: 4;
+  border-top-left-radius: 5px;
+  border-top-right-radius: 5px;
+  background: -webkit-gradient(linear, left top, left bottom, color-stop(6%, #315fb3), color-stop(6%, #222222), color-stop(75%, #222222), color-stop(75%, #222222));
+  background: linear-gradient(to bottom, #315fb3 6%, #222222 6%, #222222 75%, #222222 75%);
 }
 
 .wrapper .clock-container .clock .time-container {
@@ -426,13 +432,20 @@ body {
   cursor: pointer;
   font-size: 1.5vw;
   margin-bottom: 0.5vw;
-  margin-right: 1vw;
+  margin-right: 2vw;
   padding: 0.1vw 1vw;
   border-radius: 5px;
+  border-bottom: 1px solid grey;
 }
 
 .wrapper .lap-container .lap-list li:hover {
   background-color: #7a7a7a;
+}
+
+.wrapper .lap-container .lap-list li small {
+  margin-right: 2vw;
+  text-align: left;
+  letter-spacing: 0.3vw;
 }
 
 .wrapper .lap-container .lap-list::-webkit-scrollbar {
