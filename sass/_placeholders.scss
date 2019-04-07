@@ -20,3 +20,20 @@
     z-index: 8;
   }
 }
+
+%time-numbers {
+  $degree: 30;
+  @each $number in num1,num2,num3,num4,num5,num6,num7,num8,num9,num10,num11,num12 {
+    .#{$number} {
+      transform: rotate(#{$degree}deg);
+    }
+    $degree: $degree + 30;
+  }
+
+  @each $number in num1,num2,num3,num4,num5,num6,num7,num8,num9,num10,num11,num12 {
+    .#{$number} div {
+      transform: rotate(-#{$degree}deg);
+    }
+    $degree: $degree + 30;
+  }
+}

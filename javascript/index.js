@@ -1,7 +1,5 @@
 var clock = document.querySelector(".clock");
 
-var second_tick = document.querySelector(".seconds-container");
-var minute_tick = document.querySelector(".minutes-container");
 var timer = document.getElementById("time");
 
 var pause = document.querySelector(".fa-pause");
@@ -15,26 +13,47 @@ var laps_array = [];
 var store_array;
 
 var state = "stop";
-// var miliseconds = 0;
-var seconds = 0;
-var minutes = 0;
+    hours = 0;
+    minutes = 0;
+    seconds = 0;
+    miliseconds = 0;
 var interval;
 
-
-seconds = JSON.parse(localStorage.getItem('seconds'));
-minutes = JSON.parse(localStorage.getItem('minutes'));
+store_hours = JSON.parse(localStorage.getItem('hours'));
+store_minutes = JSON.parse(localStorage.getItem('minutes'));
+store_seconds = JSON.parse(localStorage.getItem('seconds'));
+store_miliseconds = JSON.parse(localStorage.getItem('miliseconds'));
 store_array = JSON.parse(localStorage.getItem('laps_array'));
 
 if (store_array) {
   laps_array = store_array;
   console.log(laps_array);
 }
+if (store_hours) {
+  hours = store_hours;
+  console.log(hours);
+}
+if (store_minutes) {
+  minutes = store_minutes;
+  console.log(minutes);
+}
+if (store_seconds) {
+  seconds = store_seconds;
+  console.log(seconds);
+}
+if (store_miliseconds) {
+  miliseconds = store_miliseconds;
+  console.log(miliseconds);
+}
 
+console.log(hours, minutes, seconds, miliseconds);
 displayLaps();
 
-document.querySelector(".seconds").style.transform = `rotateZ(${seconds * 6}deg)`;
+document.querySelector(".hours").style.transform = `rotateZ(${hours * 6}deg)`;
 document.querySelector(".minutes").style.transform = `rotateZ(${minutes * 6}deg)`;
-displayTime(minutes, seconds);
+document.querySelector(".seconds").style.transform = `rotateZ(${seconds * 6}deg)`;
+document.querySelector(".seconds").style.transform = `rotateZ(${seconds * 6}deg)`;
+displayTime(hours, minutes, seconds, miliseconds);
 
 if(seconds > 0 || minutes > 0) {
   timer.id = "changed-timer";
@@ -43,8 +62,6 @@ if(seconds > 0 || minutes > 0) {
 
 function init(value) {
   if(value === "run") {
-    second_tick.className = "seconds-container";
-    minute_tick.className = "minutes-container";
     timer.className = "timer";
     start();
   }
@@ -102,15 +119,15 @@ function reset() {
   state = "stop";
 
   clearInterval(interval);
-  seconds = minutes = 0;
-  displayTime(0, 0);
-  // clock.style.top = "50%";
+  hours = minutes = seconds = miliseconds = 0;
+
+  displayTime(0, 0, 0, 0);
+  clearTime();
 }
 
 function updateState(currentState) {
   if (currentState === "running") {
-    second_tick.style.webkitAnimationPlayState = "running";
-    minute_tick.style.webkitAnimationPlayState = "running";
+    console.log(hours, minutes, seconds, miliseconds);
 
     pause.style.display = "inline";
     play.style.display = "none";
@@ -122,14 +139,11 @@ function updateState(currentState) {
     
     timer.id = "time";
 
-    interval = setInterval(digitalTime, 1000);
+    interval = setInterval(increaseTime, 1000 / 60);
   }
 
   if (currentState === "pause") {
     clearInterval(interval);
-
-    second_tick.style.webkitAnimationPlayState = "paused";
-    minute_tick.style.webkitAnimationPlayState = "paused";
 
     play.style.display = "inline";
     pause.style.display = "none";
@@ -138,8 +152,6 @@ function updateState(currentState) {
   }
   
   if (currentState === "stop") {
-    second_tick.style.webkitAnimationPlayState = "paused";
-    minute_tick.style.webkitAnimationPlayState = "paused";
 
     reset_button.style.visibility = "initial";
     lap_button.style.visibility = "initial";
@@ -153,7 +165,7 @@ function updateState(currentState) {
   }
 }
 
-function displayTime(min, sec) {
+function displayTime(hr, min, sec, ms) {
   if (sec < 10) {
     sec = `0${sec}`; 
   }
@@ -168,25 +180,37 @@ function displayTime(min, sec) {
   } else {
     document.getElementById("time").innerHTML = time;
 
-    // document.getElementById("ms").innerHTML = ms;  
-
-    document.querySelector(".seconds").style.transform = `rotateZ(${sec * 6}deg)`;
+    document.querySelector(".hours").style.transform = `rotateZ(${hr * 6}deg)`;
     document.querySelector(".minutes").style.transform = `rotateZ(${min * 6}deg)`;
+    document.querySelector(".seconds").style.transform = `rotateZ(${sec * 6}deg)`;
+    document.querySelector(".miliseconds").style.transform = `rotateZ(${ms * 6}deg)`;
   }
 }
 
-function digitalTime() {
-  seconds++;
-  if(seconds >= 60) {
-    seconds = 0;
-    minutes++;
+function increaseTime() {
+  miliseconds++;
+  if(miliseconds >= 60) {
+    miliseconds = 0;
+    seconds++;
+    if(seconds >= 60) {
+      seconds = 0;
+      minutes++;
+      if(minutes >= 60) {
+        minutes = 0;
+        hours++;
+      }
+    }
   }
-  displayTime(minutes, seconds);
+  console.log(hours, minutes, seconds, miliseconds);
+
+  displayTime(hours, minutes, seconds, miliseconds);
 }
 
 function refresh() {
-  localStorage.setItem('seconds', JSON.stringify(seconds));
+  localStorage.setItem('hours', JSON.stringify(hours));
   localStorage.setItem('minutes', JSON.stringify(minutes));
+  localStorage.setItem('seconds', JSON.stringify(seconds));
+  localStorage.setItem('miliseconds', JSON.stringify(miliseconds));
 }
 
 function displayLaps() {
@@ -209,4 +233,10 @@ function removeLaps() {
 function clearLaps() {
   localStorage.removeItem('laps_array');
   removeLaps();
+}
+function clearTime() {
+  localStorage.removeItem('hours');
+  localStorage.removeItem('minutes');
+  localStorage.removeItem('seconds');
+  localStorage.removeItem('miliseconds');
 }

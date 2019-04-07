@@ -48,6 +48,22 @@ body {
       align-items: center;
       transition: top 0.3s ease-out;
 
+      .num {
+        @include size(null, 100%);
+        position: absolute;
+        left: calc(50% - 0.5em);
+      }
+      
+      .num div {
+        width: 1em;
+        line-height: 2em;
+        font-size: 1.1em;
+        color: white;
+        text-align: center;
+        vertical-align: middle;
+      }
+      @extend %time-numbers;
+      
       .dot {
         @include size(6%, 6%);
         @include position(50%, null, null, 50%);
@@ -57,43 +73,56 @@ body {
         border-radius: 50%;
       }
 
-      .seconds-container {
+      .hours-container, .minutes-container, .seconds-container, .miliseconds-container {
         @include position(0, 0, 0, 0);
         position: absolute;
-
-        .seconds {
-          @include size(1%, 45%);
-          @include position(10%, null, null, 49.5%);
-          position: relative;
-          background: $tick-bg;
-          transform-origin: 90% 90%;
-          z-index: 10;
-        }
       }
 
-      .minutes-container {
-        @include position(0, 0, 0, 0);
-        position: absolute;
-        // animation: rotate 3600s infinite steps(60);
-        // animation-play-state: paused;
-
-        .minutes {
-          @include size(2%, 35%);
-          @include position(20%, null, null, 49%);
-          position: relative;
-          background: $tick-bg;
-          transform-origin: 86% 86%;
-          z-index: 8;
-        }
+      .hours {
+        @include size(2.5%, 20%);
+        @include position(30%, null, null, 48.75%);
+        position: relative;
+        background: $tick-bg;
+        transform-origin: 50% 100%;
+        z-index: 6;
       }
+      .minutes {
+        @include size(2%, 40%);
+        @include position(10%, null, null, 49%);
+        position: relative;
+        background: $tick-bg;
+        transform-origin: 50% 100%;
+        z-index: 8;
+      }
+      .seconds {
+        @include size(1%, 45%);
+        @include position(14%, null, null, 49.5%);
+        position: relative;
+        background: $tick-bg;
+        transform-origin: 50% 80%;
+        z-index: 10;
+      }
+      .miliseconds {
+        @include size(1%, 20%);
+        @include position(39%, null, null, 49.5%);
+        position: relative;
+        background: $tick-bg;
+        transform-origin: 50% 50%;
+        z-index: 10;
+      }
+
+      // .minutes-container {
+      //   // animation: rotate 3600s infinite steps(60);
+      //   // animation-play-state: paused;
+      // }
 
       .time-container {
         @include size(100%, null);
-        @include position(30%, 0, 0, 0);
+        @include position(26%, 0, 0, 0);
         position: relative;
 
         #time {
-          @include size(11vw);
+          @include size(11.5vw);
           margin-right: auto;
           margin-left: auto;
           position: relative;
@@ -248,7 +277,7 @@ body {
   @extend %changed;
 }
 #changed-timer {
-  @include size(11vw);
+  @include size(11.5vw);
   margin-right: auto;
   margin-left: auto;
   position: relative;
