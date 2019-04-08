@@ -39,6 +39,7 @@ body {
     margin-right: auto;
     margin-left: auto;
     transition: all 0.5s ease-in;
+    
   
     .clock {
       @include size(30vw, 30vw);
