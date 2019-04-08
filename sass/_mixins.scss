@@ -14,3 +14,10 @@
   right: $right;
   left: $left;
 }
+
+@mixin tick($origin-x, $origin-y, $z-index) {
+  position: relative;
+  background: $tick-bg;
+  transform-origin: $origin-x $origin-y;
+  z-index: $z-index;
+}
