@@ -4,13 +4,14 @@
 
 * {
   font-family: 'Overlock SC', cursive;
-  overflow: hidden;
+  // overflow: hidden;
 }
 html {
   height: 100%;
 }
 body {
   background: $body-bg;
+  overflow: hidden;
   width: 100%;
 }
 
@@ -118,7 +119,7 @@ body {
         z-index: 4;
         border-top-left-radius: 50px;
         border-top-right-radius: 50px;
-        background: linear-gradient(to bottom, $tick-bg 6%, $body-bg 6%, $body-bg 75%, $body-bg 75% )
+        background: linear-gradient(to bottom, $tick-bg 6%, $body-bg 6%, $body-bg 75%, $body-bg 75%);
       }
 
       // .minutes-container {
@@ -127,21 +128,29 @@ body {
       // }
 
       .time-container {
-        // @include size(100%, null);
-        @include position(50%, 0, 0, 0);
-        position: absolute;
+        @include size(100%, 100%);
+        // @include position(50%, 0, 0, 0);
+        position: relative;
+
         #time {
-          @include size(11.5vw);
-          margin-right: auto;
-          margin-left: auto;
+          @include position(45%, 0, 0, 0);
+          // overflow: hidden;
+          list-style: none;
+          text-align: center;
           position: relative;
           color: $tick-bg;
           font-size: 5vw;
           z-index: 20;
-
-          @media screen and(max-width:400px) {
-            @include size(70px);
-            font-size: 30px;
+       
+          #min, #sec, #ms {
+            width: 17%;
+            display: inline-block;
+            font-size: 5vw;
+          }
+          #ms {
+            width: 5%;
+            margin-left: 0;
+            font-size: 2vw;
           }
         }
       }
@@ -155,18 +164,10 @@ body {
       min-width: 200px;
       min-height: 200px;
       position: absolute;
-      // overflow-y: hidden;
-      // margin-right: 10vw;
-      // margin-left: 3vw;
-      // display: inline-block;
-      // display: none;
       visibility: hidden;
       transform: translate(80%, -110%);
       opacity: 0;
-      // display: flex;
-      // flex-direction: column;
       transition: transform 0.6s ease-in, opacity 1.2s ease-in;
-      // border: 1px solid white;
 
       h2 {
         text-align: left;
@@ -190,7 +191,7 @@ body {
       }
 
       .lap-list {
-        @include size(null, 25vw);
+        @include size(null, 24vw);
         list-style: none;
         padding-inline-start: 0;
         width: 90%;
@@ -331,15 +332,26 @@ body {
 .changed-container {
   @extend %changed;
 }
-#changed-timer {
-  @include size(11.5vw);
-  margin-right: auto;
-  margin-left: auto;
+#changed-time {
+  @include position(45%, 0, 0, 0);
+  list-style: none;
+  text-align: center;
   position: relative;
   color: $tick-bg;
   font-size: 5vw;
   z-index: 20;
   animation: blinker 0.6s linear infinite;
+
+  #min, #sec, #ms {
+    width: 17%;
+    display: inline-block;
+    font-size: 5vw;
+  }
+  #ms {
+    width: 5%;
+    margin-left: 0;
+    font-size: 2vw;
+  }
 }
 
 

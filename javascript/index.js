@@ -2,6 +2,10 @@ var clock = document.querySelector(".clock");
 var lap_container = document.querySelector(".lap-container");
 
 var timer = document.getElementById("time");
+var changed_timer = document.getElementById("changed-time");
+var timer_min = document.getElementById("min");
+var timer_sec = document.getElementById("sec");
+var timer_ms = document.getElementById("ms");
 
 var pause = document.querySelector(".fa-pause");
 var play = document.querySelector(".fa-play");
@@ -13,6 +17,7 @@ var parent = document.querySelector(".lap-list");
 
 var laps_array = [];
 var store_array;
+
 
 var state = "stop";
 hours = 0;
@@ -58,13 +63,13 @@ document.querySelector(".miliseconds").style.transform = `rotateZ(${miliseconds 
 displayTime(hours, minutes, seconds, miliseconds);
 
 if (seconds > 0 || minutes > 0) {
-  timer.id = "changed-timer";
+  timer.id = "changed-time";
 }
 
 
 function init(value) {
   if (value === "run") {
-    timer.className = "timer";
+    timer.id = "timer";
     start();
   }
 
@@ -99,18 +104,6 @@ function start() {
 
 function lap() {
   if (state !== "stop") {
-    // parent.style.opacity = "1";
-
-    // clock.style.top = "28%";
-
-    // timer.style.width = "8vw";
-    // timer.style.fontSize = "3.5vw";
-
-    // document.querySelector(".clock-container").style.transform = "translateX(-10%)";
-
-    // document.querySelector(".lap-container").style.display = "flex";
-    // document.querySelector(".lap-container").style.transform = "translateX(-40%)";
-
     laps_array.unshift({ 'Minutes': minutes, 'Seconds': seconds, 'Mili': miliseconds});
     localStorage.setItem('laps_array', JSON.stringify(laps_array));
 
@@ -118,7 +111,6 @@ function lap() {
     displayLaps();
   }
 }
-
 
 function reset() {
   updateState("stop");
@@ -154,7 +146,7 @@ function updateState(currentState) {
     play.style.display = "inline";
     pause.style.display = "none";
 
-    timer.id = "changed-timer";
+    timer.id = "changed-time";
   }
 
   if (currentState === "stop") {
@@ -171,19 +163,20 @@ function updateState(currentState) {
 }
 
 function displayTime(hr, min, sec, ms) {
+  if (ms < 10) {
+    ms = `0${ms}`;
+  }
   if (sec < 10) {
     sec = `0${sec}`;
   }
   if (min < 10) {
     min = `0${min}`
   }
-  time = `${min}:${sec}`;
-  console.log(time);
 
-  if (state === "pause") {
-    document.getElementById("changed-timer").innerHTML = time;
-  } else {
-    document.getElementById("time").innerHTML = time;
+  if (state !== "pause") {
+    timer_min.innerHTML = `${min}`;
+    timer_sec.innerHTML = `${sec}`;
+    timer_ms.innerHTML = `${ms}`;
 
     document.querySelector(".hours").style.transform = `rotateZ(${hr * 6}deg)`;
     document.querySelector(".minutes").style.transform = `rotateZ(${min * 6}deg)`;
@@ -206,8 +199,6 @@ function increaseTime() {
       }
     }
   }
-  // console.log(hours, minutes, seconds, miliseconds);
-
   displayTime(hours, minutes, seconds, miliseconds);
 }
 
