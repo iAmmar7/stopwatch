@@ -7,6 +7,8 @@ var changed_timer = document.getElementById("changed-time");
 var timer_min = document.getElementById("min");
 var timer_sec = document.getElementById("sec");
 var timer_ms = document.getElementById("ms");
+var audio = document.getElementById("audio");
+audio.volume = 0.3;
 
 var pause = document.querySelector(".fa-pause");
 var play = document.querySelector(".fa-play");
@@ -258,6 +260,7 @@ function increaseTime() {
   temp_ms++;
   if (miliseconds >= 60) {
     miliseconds = 0;
+    audio.play();
     seconds++;
     if (seconds >= 60) {
       seconds = 0;
