@@ -1,3 +1,4 @@
+var clock_container = document.querySelector(".clock-container") 
 var clock = document.querySelector(".clock");
 var lap_container = document.querySelector(".lap-container");
 
@@ -6,7 +7,6 @@ var changed_timer = document.getElementById("changed-time");
 var timer_min = document.getElementById("min");
 var timer_sec = document.getElementById("sec");
 var timer_ms = document.getElementById("ms");
-var bli = document.getElementById("ms");
 
 var pause = document.querySelector(".fa-pause");
 var play = document.querySelector(".fa-play");
@@ -19,13 +19,12 @@ var parent = document.querySelector(".lap-list");
 var laps_array = [];
 var store_array;
 
-
 var state = "stop";
-hours = 0;
-minutes = 0;
-seconds = 0;
-miliseconds = 0;
-temp_ms = 0;
+    hours = 0;
+    minutes = 0;
+    seconds = 0;
+    miliseconds = 0;
+    temp_ms= 0;
 var interval;
 
 store_hours = JSON.parse(localStorage.getItem('hours'));
@@ -38,10 +37,20 @@ store_state = JSON.parse(localStorage.getItem('state'));
 
 if (store_array) {
   laps_array = store_array;
-  lap_container.style.transform = "translate(140%, -110%)";
-  lap_container.style.visibility = "visible";
-  clock.style.transform = "translateX(-80%)";
-  lap_container.style.opacity = "1";
+
+  const style = getComputedStyle(clock_container);
+
+  if(style.left !== "0px") {
+    clock.style.transform = "translateY(-80%)";
+    lap_container.style.transform = "translate(0%, -70%)";
+    lap_container.style.visibility = "visible";
+    lap_container.style.opacity = "1";
+  } else {
+    clock.style.transform = "translateX(-80%)";
+    lap_container.style.transform = "translate(120%, -110%)";
+    lap_container.style.visibility = "visible";
+    lap_container.style.opacity = "1";
+  }
 }
 
 if (store_state) {
@@ -87,7 +96,6 @@ if (seconds > 0 || minutes > 0) {
   timer.id = "changed-time";
 }
 
-
 function init(value) {
   if (value === "run") {
     timer.id = "timer";
@@ -96,10 +104,18 @@ function init(value) {
 
   if (value === "lap") {
     lap();
-    lap_container.style.transform = "translate(130%, -110%)";
     lap_container.style.visibility = "visible";
-    clock.style.transform = "translateX(-80%)";
     lap_container.style.opacity = "1";
+
+    const style = getComputedStyle(clock_container);
+
+    if(style.left !== "0px") {
+      clock.style.transform = "translateY(-80%)";
+      lap_container.style.transform = "translate(0%, -70%)";
+    } else {
+      clock.style.transform = "translateX(-80%)";
+      lap_container.style.transform = "translate(120%, -110%)";
+    }
   }
 
   if (value === "reset") {
@@ -109,7 +125,6 @@ function init(value) {
 }
 
 function start() {
-  console.log(state);
   if (state === "stop") {
     updateState("running");
     state = "running";
@@ -126,11 +141,11 @@ function start() {
 
 function lap() {
   if (state !== "stop") {
-
+    
     console.log(hours, minutes, seconds, miliseconds);
     let temp_arr = lapStep();
     console.log(temp_arr);
-
+    
     let a = seconds;
     let b = miliseconds;
 
@@ -167,7 +182,7 @@ function reset() {
   displayTime(0, 0, 0, 0);
   removeTimeFromStorage();
 
-  lap_container.style.transform = "translate(80%, -110%)";
+  lap_container.style.transform = "translate(0%, -70%)";
   lap_container.style.visibility = "hidden";
   clock.style.transform = "translateX(0%)";
   lap_container.style.opacity = "0";
@@ -300,11 +315,11 @@ function displayLaps() {
 
 function lapStep() {
   // console.log(temp_ms);
-  let hours = Math.floor(temp_ms / (60 * 60 * 60));
-  let hr_rem = temp_ms % (60 * 60 * 60);
+  let hours = Math.floor(temp_ms / (60*60*60));
+  let hr_rem = temp_ms % (60*60*60);
 
-  let mints = Math.floor(hr_rem / (60 * 60));
-  let min_rem = hr_rem % (60 * 60);
+  let mints = Math.floor(hr_rem / (60*60));
+  let min_rem = hr_rem % (60*60);
 
   let sec = Math.floor(min_rem / (60));
   let sec_rem = min_rem % (60);
