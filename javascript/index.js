@@ -16,6 +16,8 @@ var lap_button = document.querySelector(".lap");
 
 var parent = document.querySelector(".lap-list");
 
+parent.scrollTop = parent.scrollHeight;
+
 var laps_array = [];
 var store_array;
 
@@ -41,8 +43,8 @@ if (store_array) {
   const style = getComputedStyle(clock_container);
 
   if(style.left !== "0px") {
-    clock.style.transform = "translateY(-70%)";
-    lap_container.style.transform = "translate(0%, -70%)";
+    clock.style.transform = "translateY(-65%)";
+    lap_container.style.transform = "translate(0%, -65%)";
     lap_container.style.visibility = "visible";
     lap_container.style.opacity = "1";
   } else {
@@ -110,8 +112,8 @@ function init(value) {
     const style = getComputedStyle(clock_container);
 
     if(style.left !== "0px") {
-      clock.style.transform = "translateY(-70%)";
-      lap_container.style.transform = "translate(0%, -70%)";
+      clock.style.transform = "translateY(-65%)";
+      lap_container.style.transform = "translate(0%, -65%)";
     } else {
       clock.style.transform = "translateX(-80%)";
       lap_container.style.transform = "translate(120%, -110%)";
@@ -340,23 +342,24 @@ function lapStep() {
   return arr;
 }
 
+function deleteLap(id) {
+  laps_array.splice(id, 1);
+  localStorage.setItem('laps_array', JSON.stringify(laps_array));
+  removeLapsFromPage();
+  displayLaps();
+}
+
 function removeLaps() {
   removeLapsFromPage();
   laps_array.splice(0);
   localStorage.removeItem('laps_array');
+  console.log(temp_ms);
 }
 
 function removeLapsFromPage() {
   while (parent.firstChild) {
     parent.removeChild(parent.firstChild);
   }
-}
-
-function deleteLap(id) {
-  laps_array.splice(id, 1);
-  localStorage.setItem('laps_array', JSON.stringify(laps_array));
-  removeLapsFromPage();
-  displayLaps();
 }
 
 function removeTimeFromStorage() {

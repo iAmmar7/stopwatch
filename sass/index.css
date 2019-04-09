@@ -315,8 +315,6 @@ body {
   -webkit-transform-origin: 50% 97%;
           transform-origin: 50% 97%;
   z-index: 4;
-  border-top-left-radius: 50px;
-  border-top-right-radius: 50px;
   background: -webkit-gradient(linear, left top, left bottom, color-stop(6%, #315fb3), color-stop(6%, #222222), color-stop(75%, #222222), color-stop(75%, #222222));
   background: linear-gradient(to bottom, #315fb3 6%, #222222 6%, #222222 75%, #222222 75%);
 }
@@ -327,7 +325,7 @@ body {
   position: relative;
 }
 
-.wrapper .clock-container .clock .time-container #time {
+.wrapper .clock-container .clock .time-container #time, .wrapper .clock-container .clock .time-container #changed-time {
   top: 45%;
   bottom: 0;
   right: 0;
@@ -341,7 +339,7 @@ body {
 }
 
 @media screen and (max-width: 600px) {
-  .wrapper .clock-container .clock .time-container #time {
+  .wrapper .clock-container .clock .time-container #time, .wrapper .clock-container .clock .time-container #changed-time {
     font-size: 2.7em;
     position: fixed;
     top: 55%;
@@ -352,28 +350,28 @@ body {
   }
 }
 
-.wrapper .clock-container .clock .time-container #time #min, .wrapper .clock-container .clock .time-container #time #sec, .wrapper .clock-container .clock .time-container #time #ms {
+.wrapper .clock-container .clock .time-container #time #min, .wrapper .clock-container .clock .time-container #changed-time #min, .wrapper .clock-container .clock .time-container #time #sec, .wrapper .clock-container .clock .time-container #changed-time #sec, .wrapper .clock-container .clock .time-container #time #ms, .wrapper .clock-container .clock .time-container #changed-time #ms {
   width: 17%;
   display: inline-block;
   font-size: 5vw;
 }
 
 @media screen and (max-width: 600px) {
-  .wrapper .clock-container .clock .time-container #time #min, .wrapper .clock-container .clock .time-container #time #sec, .wrapper .clock-container .clock .time-container #time #ms {
+  .wrapper .clock-container .clock .time-container #time #min, .wrapper .clock-container .clock .time-container #changed-time #min, .wrapper .clock-container .clock .time-container #time #sec, .wrapper .clock-container .clock .time-container #changed-time #sec, .wrapper .clock-container .clock .time-container #time #ms, .wrapper .clock-container .clock .time-container #changed-time #ms {
     width: 1em;
     height: 1em;
     font-size: 100%;
   }
 }
 
-.wrapper .clock-container .clock .time-container #time #ms {
+.wrapper .clock-container .clock .time-container #time #ms, .wrapper .clock-container .clock .time-container #changed-time #ms {
   width: 5%;
   margin-left: 0;
   font-size: 2vw;
 }
 
 @media screen and (max-width: 600px) {
-  .wrapper .clock-container .clock .time-container #time #ms {
+  .wrapper .clock-container .clock .time-container #time #ms, .wrapper .clock-container .clock .time-container #changed-time #ms {
     width: 0em;
     font-size: 0.8em;
   }
@@ -385,10 +383,10 @@ body {
   min-width: 200px;
   min-height: 200px;
   position: absolute;
-  -webkit-transform: translate(80%, -110%);
-          transform: translate(80%, -110%);
   visibility: hidden;
   opacity: 0;
+  -webkit-transform: translate(80%, -110%);
+          transform: translate(80%, -110%);
   -webkit-transition: opacity 1.2s ease-in, -webkit-transform 0.6s ease-in;
   transition: opacity 1.2s ease-in, -webkit-transform 0.6s ease-in;
   transition: transform 0.6s ease-in, opacity 1.2s ease-in;
@@ -399,8 +397,8 @@ body {
   .wrapper .clock-container .lap-container {
     width: 100%;
     height: 100%;
-    -webkit-transform: translate(0%, -75%);
-            transform: translate(0%, -75%);
+    -webkit-transform: translate(0%, -70%);
+            transform: translate(0%, -70%);
   }
 }
 
@@ -444,21 +442,19 @@ body {
   list-style: none;
   -webkit-padding-start: 0;
           padding-inline-start: 0;
-  width: 90%;
-  margin: 1vw auto 0 auto;
+  margin: 1vw auto 3vw auto;
   overflow-y: hidden;
 }
 
 @media screen and (max-width: 600px) {
   .wrapper .clock-container .lap-container .lap-list {
-    margin-top: 1em;
-    margin-left: 2em;
-    height: 85vw;
+    margin: 1em 1em;
+    height: 70vw;
   }
 }
 
 .wrapper .clock-container .lap-container .lap-list:hover {
-  overflow-y: scroll;
+  overflow-y: overlay;
 }
 
 .wrapper .clock-container .lap-container .lap-list li {
@@ -467,7 +463,7 @@ body {
   font-size: 1.5vw;
   margin-bottom: 0.5vw;
   margin-right: 2vw;
-  padding: 0.1vw 1vw;
+  padding: 0.3vw 1vw;
   border-radius: 5px;
   border-bottom: 1px solid grey;
   display: -webkit-box;
@@ -575,7 +571,7 @@ body {
 }
 
 .wrapper .clock-container .lap-container .clear-laps button:hover {
-  background-color: rgba(49, 95, 179, 0.8);
+  background-color: rgba(34, 85, 179, 0.9);
 }
 
 .wrapper .buttons-div {
@@ -648,56 +644,8 @@ body {
 }
 
 #changed-time {
-  top: 45%;
-  bottom: 0;
-  right: 0;
-  left: 0;
-  list-style: none;
-  text-align: center;
-  position: relative;
-  color: #315fb3;
-  font-size: 5vw;
-  z-index: 20;
   -webkit-animation: blinker 0.6s linear infinite;
           animation: blinker 0.6s linear infinite;
-}
-
-@media screen and (max-width: 600px) {
-  #changed-time {
-    font-size: 2.7em;
-    position: fixed;
-    top: 55%;
-    left: 40%;
-    -webkit-transform: translate(-50%, -40%);
-            transform: translate(-50%, -40%);
-    height: 2em;
-  }
-}
-
-#changed-time #min, #changed-time #sec, #changed-time #ms {
-  width: 17%;
-  display: inline-block;
-  font-size: 5vw;
-}
-
-@media screen and (max-width: 600px) {
-  #changed-time #min, #changed-time #sec, #changed-time #ms {
-    width: 1em;
-    font-size: 100%;
-  }
-}
-
-#changed-time #ms {
-  width: 5%;
-  margin-left: 0;
-  font-size: 2vw;
-}
-
-@media screen and (max-width: 600px) {
-  #changed-time #ms {
-    width: 0em;
-    font-size: 0.8em;
-  }
 }
 
 @-webkit-keyframes blinker {

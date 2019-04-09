@@ -128,8 +128,6 @@ body {
         background: $tick-bg;
         transform-origin: 50% 97%;
         z-index: 4;
-        border-top-left-radius: 50px;
-        border-top-right-radius: 50px;
         background: linear-gradient(to bottom, $tick-bg 6%, $body-bg 6%, $body-bg 75%, $body-bg 75%);
       }
 
@@ -188,14 +186,14 @@ body {
       min-width: 200px;
       min-height: 200px;
       position: absolute;
-      transform: translate(80%, -110%);
       visibility: hidden;
       opacity: 0;
+      transform: translate(80%, -110%);
       transition: transform 0.6s ease-in, opacity 1.2s ease-in;
 
       @media screen and (max-width: $media-width) {
         @include size(100%, 100%);
-        transform: translate(0%, -75%);
+        transform: translate(0%, -70%);
       }
 
       h2 {
@@ -231,18 +229,16 @@ body {
         @include size(null, 24vw);
         list-style: none;
         padding-inline-start: 0;
-        width: 90%;
-        margin: 1vw auto 0 auto;
+        margin: 1vw auto 3vw auto;
         overflow-y: hidden;
 
         @media screen and (max-width: $media-width) {
-          margin-top: 1em;
-          margin-left: 2em;
-          height: 85vw;
+          margin: 1em 1em;
+          height: 70vw;
         }
         
         &:hover {
-          overflow-y: scroll;
+          overflow-y: overlay;
         }
 
         li {
@@ -251,7 +247,7 @@ body {
           font-size: 1.5vw;
           margin-bottom: 0.5vw;
           margin-right: 2vw;
-          padding: 0.1vw 1vw;
+          padding: 0.3vw 1vw;
           border-radius: 5px;
           border-bottom: 1px solid grey;
           display: flex;
@@ -388,7 +384,6 @@ body {
       }
   
       .lap, .reset {
-        // width: 60px;
         visibility: hidden;
         opacity: 0;
         transition: opacity 0.5s ease-in;
@@ -401,47 +396,11 @@ body {
 .changed-container {
   @extend %changed;
 }
+
 #changed-time {
-  @include position(45%, 0, 0, 0);
-  list-style: none;
-  text-align: center;
-  position: relative;
-  color: $tick-bg;
-  font-size: 5vw;
-  z-index: 20;
+  @extend #time;
   animation: blinker 0.6s linear infinite;
-
-  @media screen and (max-width: $media-width) {
-    font-size: 2.7em;
-    position: fixed;
-    top: 55%;
-    left: 40%;
-    transform: translate(-50%, -40%);
-    height: 2em;
-  }
-
-  #min, #sec, #ms {
-    width: 17%;
-    display: inline-block;
-    font-size: 5vw;
-
-    @media screen and (max-width: $media-width) {
-      width: 1em;
-      font-size: 100%;
-    }
-  }
-  #ms {
-    width: 5%;
-    margin-left: 0;
-    font-size: 2vw;
-
-    @media screen and (max-width: $media-width) {
-      width: 0em;
-      font-size: 0.8em;
-    }
-  }
 }
-
 
 @keyframes blinker {
   50% {
