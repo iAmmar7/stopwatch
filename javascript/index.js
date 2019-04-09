@@ -41,7 +41,7 @@ if (store_array) {
   const style = getComputedStyle(clock_container);
 
   if(style.left !== "0px") {
-    clock.style.transform = "translateY(-80%)";
+    clock.style.transform = "translateY(-70%)";
     lap_container.style.transform = "translate(0%, -70%)";
     lap_container.style.visibility = "visible";
     lap_container.style.opacity = "1";
@@ -110,7 +110,7 @@ function init(value) {
     const style = getComputedStyle(clock_container);
 
     if(style.left !== "0px") {
-      clock.style.transform = "translateY(-80%)";
+      clock.style.transform = "translateY(-70%)";
       lap_container.style.transform = "translate(0%, -70%)";
     } else {
       clock.style.transform = "translateX(-80%)";

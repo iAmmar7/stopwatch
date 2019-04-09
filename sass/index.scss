@@ -236,6 +236,8 @@ body {
         overflow-y: hidden;
 
         @media screen and (max-width: $media-width) {
+          margin-top: 1em;
+          margin-left: 2em;
           height: 85vw;
         }
         
@@ -348,7 +350,8 @@ body {
     @media screen and (max-width: $media-width) {
       background-color: $fixed_button;
       position: fixed;
-      bottom: 2%;
+      bottom: 0%;
+      padding-bottom: 2%;
     }
     .all-buttons {
       display: flex;
