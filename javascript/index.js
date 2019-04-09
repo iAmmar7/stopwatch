@@ -6,6 +6,7 @@ var changed_timer = document.getElementById("changed-time");
 var timer_min = document.getElementById("min");
 var timer_sec = document.getElementById("sec");
 var timer_ms = document.getElementById("ms");
+var bli = document.getElementById("ms");
 
 var pause = document.querySelector(".fa-pause");
 var play = document.querySelector(".fa-play");
