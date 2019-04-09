@@ -7,7 +7,9 @@ var changed_timer = document.getElementById("changed-time");
 var timer_min = document.getElementById("min");
 var timer_sec = document.getElementById("sec");
 var timer_ms = document.getElementById("ms");
+
 var audio = document.getElementById("audio");
+var audio = new Audio("/tick.wav");
 audio.volume = 0.3;
 
 var pause = document.querySelector(".fa-pause");
