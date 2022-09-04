@@ -6,5 +6,5 @@ A straightforward stopwatch application with laps history using Vanilla JS and S
 - Difference between the last time lapse.
 - Built with pure JS and Sass.
 - Responsive layout for mobile screen.
-- LocalStorage usage to store the last timer.
+- LocalStorage usage to store the last timer and laps history.
 - Continue from the last time stored in LocalStorage.
