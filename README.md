@@ -1,5 +1,5 @@
 # stopwatch
-A simple stopwatch with laps history using Vanilla JS and Sass.
+A straightforward stopwatch application with laps history using Vanilla JS and Sass.
 
 ## Features
 - Time laps
